@@ -36,5 +36,31 @@ namespace location_preprocessor.Services
 
             return output;
         }
+
+        public List<LocationData> sortAlphabetically(List<LocationOutputData> inputData)
+        {
+            var alphabeticallyLocationData = new List<LocationData>();
+
+            Enumerable.Range('a', 'z' - 'a' + 1).ToList().ForEach(c =>
+            {
+                char letter = (Char)c;
+                alphabeticallyLocationData.Add(new LocationData
+                {
+                    Id = letter,
+                    Locations = new List<LocationOutputData>()
+                });
+            });
+            // Edge case: plaatsnamen starting with ' 
+            alphabeticallyLocationData.Add(new LocationData { Id = '\'', Locations = new List<LocationOutputData>() });
+
+            inputData.ForEach(ld =>
+            {
+                alphabeticallyLocationData
+                    .Where(sld => sld.Id == Char.ToLower(ld.Plaatsnaam.ElementAt(0)))
+                    .First().Locations.Add(ld);
+            });
+
+            return alphabeticallyLocationData;
+        }
     }
 }

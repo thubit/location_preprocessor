@@ -23,8 +23,9 @@ namespace location_preprocessor
 
             List<LocationInputData> locationsInput = locationDataProcessor.ConvertJsonData();
             List<LocationOutputData> locationsOuput = locationOutputService.ConvertInputData(locationsInput);
+            List<LocationData> sortedLocations = locationOutputService.sortAlphabetically(locationsOuput);
 
-            string locationJsonData = JsonSerializer.Serialize<List<LocationOutputData>>(locationsOuput, new JsonSerializerOptions
+            string locationJsonData = JsonSerializer.Serialize<List<LocationData>>(sortedLocations, new JsonSerializerOptions
             {
                 AllowTrailingCommas = true,
                 WriteIndented = true
@@ -32,7 +33,6 @@ namespace location_preprocessor
 
             using var streamWriter = new StreamWriter(@"locations.json", false, Encoding.UTF8);
             streamWriter.WriteLine(locationJsonData);
-            Log.Information(locationJsonData);
         }
     }
 }
