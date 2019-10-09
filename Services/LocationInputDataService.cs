@@ -14,7 +14,7 @@ namespace location_preprocessor.Services
         public List<LocationInputData> ConvertJsonData()
         {
             var locationData = new List<LocationInputData>();
-            using var streamReader = File.OpenText(@"./LocationDataFiles/input/TypedDataSet.json");
+            using var streamReader = File.OpenText(@"LocationDataFiles\input\TypedDataSet.json");
             try
             {
                 using var document = JsonDocument.Parse(streamReader.ReadToEnd());

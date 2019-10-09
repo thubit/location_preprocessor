@@ -30,9 +30,8 @@ namespace location_preprocessor
                 WriteIndented = true
             });
 
-            using var streamWriter = new StreamWriter(@"./LocationDataFiles/output/locations.json", false, Encoding.UTF8);
+            using var streamWriter = new StreamWriter(@"locations.json", false, Encoding.UTF8);
             streamWriter.WriteLine(locationJsonData);
-
             Log.Information(locationJsonData);
         }
     }
