@@ -25,7 +25,6 @@ namespace location_preprocessor.Services
                 //Deserialize the json data to type Location
                 foreach (var location in locations.EnumerateArray())
                 {
-                    String textDate = location.GetRawText();
                     LocationInputData data = JsonSerializer.Deserialize<LocationInputData>(location.GetRawText(), null);
                     locationData.Add(data);
                 }
