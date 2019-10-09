@@ -1,12 +1,11 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Serilog;
 using System.Collections.Generic;
-using System.Linq;
 
 using location_preprocessor.Models;
 using location_preprocessor.Services;
 using System.IO;
+using System.Text;
 
 namespace location_preprocessor
 {
@@ -31,7 +30,7 @@ namespace location_preprocessor
                 WriteIndented = true
             });
 
-            using var streamWriter = new StreamWriter(@"./LocationDataFiles/output/locations.json");
+            using var streamWriter = new StreamWriter(@"./LocationDataFiles/output/locations.json", false, Encoding.UTF8);
             streamWriter.WriteLine(locationJsonData);
 
             Log.Information(locationJsonData);
